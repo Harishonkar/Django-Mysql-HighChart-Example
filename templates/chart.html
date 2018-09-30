@@ -5,10 +5,11 @@
   <title>Django Highcharts Example</title>
 </head>
 <body>
- <div id="container"></div>
+ <div id="barChart"></div>
+<div id="lineChart"></div>
   <script src="https://code.highcharts.com/highcharts.src.js"></script>
   <script>
-   Highcharts.chart('container', {
+   Highcharts.chart('barChart', {
       chart: {
           type: 'column'
       },
@@ -33,6 +34,30 @@
           color: 'orange'
       }]
      });
+	
+	Highcharts.chart('lineChart', {
+      title: {
+          text: 'Example line Chart'
+      },
+      xAxis: {
+          categories: [
+            {% for data in dataset %}
+			{{ data.id }} , 			 
+		{% endfor %}
+          ]
+      },
+      series: [{
+          name: 'Data Id',
+          data: [
+            {% for data in dataset %}
+			{{ data.data_points }},
+		  
+		 {% endfor %}
+          ],
+          color: 'blue'
+      }]
+     });
+
   </script>
 </body>
 </html>
